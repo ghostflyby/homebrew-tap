@@ -10,6 +10,13 @@ class Jdkfind < Formula
     regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 
+  bottle do
+    root_url "https://github.com/ghostflyby/homebrew-tap/releases/download/jdkfind-0.5.1"
+    sha256 cellar: :any, arm64_tahoe:   "109fcb7adc573e909e3b84b0fe1c3ab357fd39507573143e33cffd148f8df940"
+    sha256 cellar: :any, arm64_sequoia: "69a7ffa55c0da8bd7a8296417aea6a8ac6ce18fc15585f0e0a73a659be4c7f2e"
+    sha256 cellar: :any, x86_64_linux:  "2f77733435c31d6c13c0a94bf7791f484656bdf278352af4aab3631b94080fd2"
+  end
+
   depends_on "dotnet" => :build
   # NativeAOT links the crypto and compression shims into the binary at build
   # time, so the produced executable load-commands brew's openssl and brotli.
