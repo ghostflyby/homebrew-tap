@@ -34,8 +34,9 @@ class Jdkfind < Formula
       "-o", buildpath/"publish"
 
     if OS.linux?
+      libexec.install buildpath/"publish/jdkfind"
       env = { LD_LIBRARY_PATH: "#{formula_opt_lib("icu4c@78")}:${LD_LIBRARY_PATH:-}" }
-      (bin/"jdkfind").write_env_script buildpath/"publish/jdkfind", env
+      (bin/"jdkfind").write_env_script libexec/"jdkfind", env
     else
       bin.install buildpath/"publish/jdkfind"
     end
