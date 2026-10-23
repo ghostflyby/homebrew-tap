@@ -16,9 +16,11 @@ class Jdkfind < Formula
   depends_on "brotli"
   depends_on "openssl@4"
 
-  # .NET dlopens ICU by soname at runtime and icu4c@78 is keg-only, so Linux
-  # needs its lib dir on the loader path (same approach as the dotnet formula).
+  # .NET dlopens ICU by soname at runtime and icu4c@78 is keg-only, so its lib
+  # dir is not on the default loader path; the RUNPATH added in install makes
+  # dlopen resolve it (glibc consults the calling executable's RUNPATH).
   on_linux do
+    depends_on "patchelf" => :build
     depends_on "icu4c@78"
   end
 
@@ -33,12 +35,10 @@ class Jdkfind < Formula
       "-p:PublishAot=true",
       "-o", buildpath/"publish"
 
+    bin.install buildpath/"publish/jdkfind"
+
     if OS.linux?
-      libexec.install buildpath/"publish/jdkfind"
-      env = { LD_LIBRARY_PATH: "#{formula_opt_lib("icu4c@78")}:${LD_LIBRARY_PATH:-}" }
-      (bin/"jdkfind").write_env_script libexec/"jdkfind", env
-    else
-      bin.install buildpath/"publish/jdkfind"
+      system "patchelf", "--add-rpath", formula_opt_lib("icu4c@78"), bin/"jdkfind"
     end
   end
 
