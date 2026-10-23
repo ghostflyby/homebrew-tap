@@ -6,7 +6,7 @@ class Jdkfind < Formula
   license "Apache-2.0"
 
   livecheck do
-    url :url
+    url :stable
     regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 
@@ -15,6 +15,12 @@ class Jdkfind < Formula
   # time, so the produced executable load-commands brew's openssl and brotli.
   depends_on "brotli"
   depends_on "openssl@4"
+
+  # .NET dlopens ICU by soname at runtime and icu4c@78 is keg-only, so Linux
+  # needs its lib dir on the loader path (same approach as the dotnet formula).
+  on_linux do
+    depends_on "icu4c@78"
+  end
 
   def install
     ENV["DOTNET_CLI_TELEMETRY_OPTOUT"] = "1"
@@ -27,7 +33,12 @@ class Jdkfind < Formula
       "-p:PublishAot=true",
       "-o", buildpath/"publish"
 
-    bin.install buildpath/"publish/jdkfind"
+    if OS.linux?
+      env = { LD_LIBRARY_PATH: "#{formula_opt_lib("icu4c@78")}:${LD_LIBRARY_PATH:-}" }
+      (bin/"jdkfind").write_env_script buildpath/"publish/jdkfind", env
+    else
+      bin.install buildpath/"publish/jdkfind"
+    end
   end
 
   test do
