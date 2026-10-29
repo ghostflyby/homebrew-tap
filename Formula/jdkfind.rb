@@ -18,10 +18,6 @@ class Jdkfind < Formula
   end
 
   depends_on "dotnet" => :build
-  # NativeAOT links the crypto and compression shims into the binary at build
-  # time, so the produced executable load-commands brew's openssl and brotli.
-  depends_on "brotli"
-  depends_on "openssl@4"
 
   # .NET dlopens ICU by soname at runtime and icu4c@78 is keg-only, so its lib
   # dir is not on the default loader path; the RUNPATH added in install makes
