@@ -10,6 +10,13 @@ class Jdkfind < Formula
     regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 
+  bottle do
+    root_url "https://github.com/ghostflyby/homebrew-tap/releases/download/jdkfind-0.5.2"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "7f0ccdeb0c7e692ae2320d80dd233b1131a2ab701c3734f858eeb54fae963d3d"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "f2e06e20efc873420f1a331bb3b09f792c68b5e26c7544ab2d12098806269876"
+    sha256 cellar: :any,                 x86_64_linux:  "d425a5f1dd0a5469dbe8fb2bb75fe0daa16302f4268633556eff54129ba00213"
+  end
+
   depends_on "dotnet" => :build
 
   # No runtime library dependencies: the AOT binary links system libraries
