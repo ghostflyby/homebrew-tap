@@ -28,9 +28,12 @@ class Jdkfind < Formula
 
     rid = "#{OS.mac? ? "osx" : "linux"}-#{Hardware::CPU.arm? ? "arm64" : "x64"}"
 
+    # Upstream dropped the hardcoded <Version> from the csproj in v0.7.0 and
+    # injects the tag version in its own release workflow, so pass it here.
     system "dotnet", "publish", "JdkFind.Cli",
       "-c", "Release",
       "-r", rid,
+      "-p:Version=#{version}",
       "-p:PublishAot=true",
       "-o", buildpath/"publish"
 
