@@ -1,8 +1,8 @@
 class Jdkfind < Formula
   desc "Locate installed JDKs across Windows, macOS and Linux"
   homepage "https://github.com/ghostflyby/JdkFind"
-  url "https://github.com/ghostflyby/JdkFind/archive/refs/tags/v0.6.0.tar.gz"
-  sha256 "6e541a6cc6c31c6aa669ed035d1f3c34de7b4c5f77e5edbcf910591796772e06"
+  url "https://github.com/ghostflyby/JdkFind/archive/refs/tags/v0.8.0.tar.gz"
+  sha256 "368d731f0e17df98c74ab791f3dcf71bebd5b47eae24fb1cdd7c9b2cc69f56da"
   license "Apache-2.0"
 
   livecheck do
