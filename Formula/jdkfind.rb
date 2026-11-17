@@ -11,10 +11,10 @@ class Jdkfind < Formula
   end
 
   bottle do
-    root_url "https://github.com/ghostflyby/homebrew-tap/releases/download/jdkfind-0.9.0"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "aaaa4c2d276c743da4f9272c8714e32c3d7b48b09cd4d20d7cfe7c9b1f774a73"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "de09a4eda2e53afdf97d74804333108a40d0fddcb20909619086513e7b245387"
-    sha256 cellar: :any,                 x86_64_linux:  "09be1db77589f639292cf85d8f95ea88956f703590ffca515754b207d3e49075"
+    root_url "https://github.com/ghostflyby/homebrew-tap/releases/download/jdkfind-0.10.0"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e191253df04f0b4282c6c86d3999539a9778b221d249bd6ec87785a59463a4cf"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "cb518b1ea57a5becb2fe2311fcbe4e8e8da35f5e1c6f10b38592ff5423ef0a05"
+    sha256 cellar: :any,                 x86_64_linux:  "1a7c7f5bb991424cd518c691eb4238b77c89ee5df52fec8bcee8f560d3362042"
   end
 
   depends_on "dotnet" => :build
